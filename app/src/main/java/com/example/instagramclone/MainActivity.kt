@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.instagramclone.navigation.*
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        setToolbarDefault()
         when(item.itemId){
             R.id.action_home -> {
                 var detailViewFragment = DetailViewFragment()
@@ -59,5 +61,11 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             }
         }
         return false
+    }
+
+    fun setToolbarDefault(){
+        toolbar_title_image.visibility = View.VISIBLE
+        toolbar_button_back.visibility = View.GONE
+        toolbar_username.visibility = View.GONE
     }
 }
