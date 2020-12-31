@@ -12,6 +12,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.instagramclone.R
 import com.example.instagramclone.navigation.model.AlarmDTO
 import com.example.instagramclone.navigation.model.ContentDTO
+import com.example.instagramclone.navigation.util.FcmPush
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
@@ -53,6 +54,9 @@ class CommentActivity : AppCompatActivity() {
         alarmDTO.timestamp = System.currentTimeMillis()
         alarmDTO.message = messsage
         FirebaseFirestore.getInstance().collection("alarms").document().set(alarmDTO)
+
+        var msg = FirebaseAuth.getInstance()?.currentUser?.email + " " + getString(R.string.alarm_comment) + " of " + messsage
+        FcmPush.instance.sendMessage(destinationUid, "howlstagram", msg)
     }
 
     inner class CommentRecyclerviewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
